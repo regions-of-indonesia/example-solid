@@ -9,17 +9,19 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@regions-of-indonesia/client": "^5.2.1",
-    "solid-js": "^1.7.8"
+    "@regions-of-indonesia/client": "^5.2.2",
+    "clsx": "^2.0.0",
+    "solid-js": "^1.8.5"
   },
   "devDependencies": {
-    "@regions-of-indonesia/types": "^5.1.1",
-    "autoprefixer": "^10.4.15",
-    "daisyui": "^3.7.4",
-    "postcss": "^8.4.29",
-    "tailwindcss": "^3.3.3",
-    "typescript": "^5.0.2",
-    "vite": "^4.4.5",
-    "vite-plugin-solid": "^2.7.0"
+    "@coloradix/tailwindcss": "^2.3.0",
+    "@regions-of-indonesia/types": "^5.1.2",
+    "@tailwindcss/forms": "^0.5.7",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.5",
+    "typescript": "^5.2.2",
+    "vite": "^4.5.0",
+    "vite-plugin-solid": "^2.7.2"
   }
 }

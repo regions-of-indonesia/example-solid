@@ -1,3 +1,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-neutral-1 text-neutral-12;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgb(var(--neutral-5));
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--neutral-8));
+  }
+
+  ::-moz-selection {
+    @apply bg-info-9 text-white;
+  }
+
+  ::selection {
+    @apply bg-info-9 text-white;
+  }
+}

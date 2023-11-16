@@ -1,21 +1,34 @@
 import type { Config } from "tailwindcss";
 
-import daisyui, { type Config as DaisyuiConfig } from "daisyui";
+import forms from "@tailwindcss/forms";
+
+import coloradix, { gray, violet, red, green, yellow, blue } from "@coloradix/tailwindcss";
+
+const radix = coloradix({
+  gray,
+  violet,
+  red,
+  green,
+  yellow,
+  blue,
+})
+  .alias({
+    neutral: "gray",
+    primary: "violet",
+    error: "red",
+    success: "green",
+    warning: "yellow",
+    info: "blue",
+  })
+  .build();
 
 export default {
   content: ["src/**/*.{ts,tsx}"],
   theme: {
-    extend: {},
+    colors: {
+      transparent: "transparent",
+      ...radix.colors,
+    },
   },
-  plugins: [daisyui],
-  daisyui: {
-    themes: false,
-    darkTheme: "dark",
-    base: true,
-    styled: true,
-    utils: true,
-    rtl: false,
-    prefix: "",
-    logs: true,
-  },
-} satisfies Config & { daisyui: DaisyuiConfig };
+  plugins: [radix.plugin, forms()],
+} satisfies Config;

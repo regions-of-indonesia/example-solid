@@ -1,6 +1,6 @@
 # example-solid
 
-Example Solid Tailwind Daisy UI
+Example Solid Tailwind
 
 <a title="github" href="https://github.com/regions-of-indonesia/example-solid">
   <picture>

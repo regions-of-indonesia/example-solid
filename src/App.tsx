@@ -1,7 +1,11 @@
-import { For, createEffect, createSignal } from "solid-js";
+import { createEffect, createSignal } from "solid-js";
 
 import { create } from "@regions-of-indonesia/client";
 import type { Region } from "@regions-of-indonesia/types";
+
+import Label from "./components/Label";
+import Select from "./components/Select";
+import RegionSelectOptions from "./components/RegionSelectOptions";
 
 const client = create();
 
@@ -59,68 +63,44 @@ function App() {
   return (
     <>
       <div class="container max-w-screen-lg mx-auto p-4 md:p-6 lg:p-8 xl:p-10">
-        <h1 class="mb-4 lg:mb-6 text-center text-lg lg:text-xl font-mono">Regions of Indonesia</h1>
+        <h1 class="mb-4 lg:mb-6 text-center text-lg md:text-xl 2xl:text-2xl font-mono font-bold">Regions of Indonesia</h1>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 lg:gap-4">
-          <div>
-            <select
-              class="select select-bordered select-xs w-full"
-              value={selectedProvinceCode()}
-              onChange={(event) => {
-                setSelectedProvinceCode(event.currentTarget.value);
-              }}
-            >
+          <div class="flex flex-col gap-1">
+            <Label for="select-provinces">Provinces</Label>
+            <Select id="select-provinces" value={selectedProvinceCode()} onChange={setSelectedProvinceCode}>
               <option value="" disabled>
                 Select...
               </option>
-
-              <For each={provinces()}>{(region) => <option value={region.code}>{region.name}</option>}</For>
-            </select>
+              <RegionSelectOptions regions={provinces()} />
+            </Select>
           </div>
-          <div>
-            <select
-              class="select select-bordered select-xs w-full"
-              value={selectedDistrictCode()}
-              onChange={(event) => {
-                setSelectedDistrictCode(event.currentTarget.value);
-              }}
-            >
+          <div class="flex flex-col gap-1">
+            <Label for="select-districts">Districts</Label>
+            <Select id="select-districts" value={selectedDistrictCode()} onChange={setSelectedDistrictCode}>
               <option value="" disabled>
                 Select...
               </option>
-
-              <For each={districts()}>{(region) => <option value={region.code}>{region.name}</option>}</For>
-            </select>
+              <RegionSelectOptions regions={districts()} />
+            </Select>
           </div>
-          <div>
-            <select
-              class="select select-bordered select-xs w-full"
-              value={selectedSubdistrictsCode()}
-              onChange={(event) => {
-                setSelectedSubdistrictsCode(event.currentTarget.value);
-              }}
-            >
+          <div class="flex flex-col gap-1">
+            <Label for="select-subdistricts">Subdistricts</Label>
+            <Select id="select-subdistricts" value={selectedSubdistrictsCode()} onChange={setSelectedSubdistrictsCode}>
               <option value="" disabled>
                 Select...
               </option>
-
-              <For each={subdistricts()}>{(region) => <option value={region.code}>{region.name}</option>}</For>
-            </select>
+              <RegionSelectOptions regions={subdistricts()} />
+            </Select>
           </div>
-          <div>
-            <select
-              class="select select-bordered select-xs w-full"
-              value={selectedVillageCode()}
-              onChange={(event) => {
-                setSelectedVillageCode(event.currentTarget.value);
-              }}
-            >
+          <div class="flex flex-col gap-1">
+            <Label for="select-villages">Villages</Label>
+            <Select id="select-villages" value={selectedVillageCode()} onChange={setSelectedVillageCode}>
               <option value="" disabled>
                 Select...
               </option>
-
-              <For each={villages()}>{(region) => <option value={region.code}>{region.name}</option>}</For>
-            </select>
+              <RegionSelectOptions regions={villages()} />
+            </Select>
           </div>
         </div>
       </div>
