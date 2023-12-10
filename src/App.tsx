@@ -1,13 +1,21 @@
 import { createEffect, createSignal } from "solid-js";
 
-import { create } from "@regions-of-indonesia/client";
+import { create, cache } from "@regions-of-indonesia/client";
+import { isRegionCode } from "@regions-of-indonesia/utils";
 import type { Region } from "@regions-of-indonesia/types";
 
 import Label from "./components/Label";
 import Select from "./components/Select";
 import RegionSelectOptions from "./components/RegionSelectOptions";
 
-const client = create();
+const client = create({
+  middlewares: [cache()],
+});
+
+const parseRegionCode = (value: unknown) => {
+  if (value && isRegionCode(value)) return value;
+  throw new Error("Invalid region code");
+};
 
 function App() {
   const [provinces, setProvinces] = createSignal<Region[]>([]);
@@ -24,6 +32,7 @@ function App() {
     try {
       setProvinces(await client.province.find());
     } catch (error) {
+      console.error(error);
       setProvinces([]);
     }
   };
@@ -34,8 +43,9 @@ function App() {
     setSelectedDistrictCode("");
 
     try {
-      setDistricts(await client.district.find(selectedProvinceCode()));
+      setDistricts(await client.district.find(parseRegionCode(selectedProvinceCode())));
     } catch (error) {
+      console.error(error);
       setDistricts([]);
     }
   });
@@ -44,8 +54,9 @@ function App() {
     setSelectedSubdistrictsCode("");
 
     try {
-      setSubdistricts(await client.subdistrict.find(selectedDistrictCode()));
+      setSubdistricts(await client.subdistrict.find(parseRegionCode(selectedDistrictCode())));
     } catch (error) {
+      console.error(error);
       setSubdistricts([]);
     }
   });
@@ -54,8 +65,9 @@ function App() {
     setSelectedVillageCode("");
 
     try {
-      setVillages(await client.village.find(selectedSubdistrictsCode()));
+      setVillages(await client.village.find(parseRegionCode(selectedSubdistrictsCode())));
     } catch (error) {
+      console.error(error);
       setVillages([]);
     }
   });
